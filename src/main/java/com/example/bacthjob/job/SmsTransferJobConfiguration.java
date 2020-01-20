@@ -1,5 +1,6 @@
 package com.example.bacthjob.job;
 
+import com.example.bacthjob.config.AgentThreadPoolConfig;
 import com.example.bacthjob.job.listener.SmsTransferJobListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class SmsTransferJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final SmsTransferJobListener smsTransferJobListener;
+    private final AgentThreadPoolConfig agentThreadPoolConfig;
 
     @Bean(name = "job_sms_transfer")
     public Job job() {
@@ -29,8 +31,21 @@ public class SmsTransferJobConfiguration {
     }
 
     @JobScope
+    private Step simpleStep2() {
+        return stepBuilderFactory.get("sampleStep")
+                .tasklet((contribution, chunkContext) -> {
+                    log.info(">>>>>>>>>>>> SMS TRANSFER UPDATE STEP TWO~START ");
+                    Thread.sleep(20000);
+                    log.info(">>>>>>>>>>>> SMS TRANSFER UPDATE STEP TWO~END ");
+                    return RepeatStatus.FINISHED;
+                }).build();
+                //.taskExecutor(agentThreadPoolConfig.executor()).throttleLimit(4).build();
+    }
+
+    @JobScope
     private Step simpleStep1() {
         return stepBuilderFactory.get("sampleStep")
+                //.tasklet(resultUpdateTasklet).build();
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">>>>>>>>>>>> SMS TRANSFER UPDATE STEP ONE~! ");
                     return RepeatStatus.FINISHED;

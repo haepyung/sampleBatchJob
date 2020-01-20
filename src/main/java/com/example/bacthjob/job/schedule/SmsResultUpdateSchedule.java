@@ -23,13 +23,14 @@ public class SmsResultUpdateSchedule implements BaseScheduler {
     @Override
     public void process() {
 
+
         try {
             JobParameters jobParameters = new JobParametersBuilder()
-                    .addString("input.file.name", "TEST")
                     .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
 
             jobLauncher.run(job, jobParameters);
+            
         } catch (Exception e) {
             log.info(e.getMessage());
         }
