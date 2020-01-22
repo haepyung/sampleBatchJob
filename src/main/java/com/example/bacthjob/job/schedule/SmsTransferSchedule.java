@@ -24,6 +24,7 @@ public class SmsTransferSchedule implements BaseScheduler {
     @Override
     public void process() {
 
+        /*
         //TODO 여기서 TRANSFER 사용 여부 체크
         log.info("시작은 하는데 JOB은 안되니?");
 
@@ -44,5 +45,8 @@ public class SmsTransferSchedule implements BaseScheduler {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
+
+
+         */
     }
 }

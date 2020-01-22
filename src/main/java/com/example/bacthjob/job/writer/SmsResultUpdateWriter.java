@@ -2,9 +2,11 @@ package com.example.bacthjob.job.writer;
 
 import com.example.bacthjob.model.Users;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class SmsResultUpdateWriter implements ItemWriter<Users> {
 
     @Override

@@ -19,7 +19,7 @@ public class SmsResultUpdateSchedule implements BaseScheduler {
     @Qualifier("job_sms_result_update") @Autowired private Job job;
     private final JobLauncher jobLauncher;
 
-    @Scheduled(cron = "*/20 * * * * ?")
+    @Scheduled(cron = "*/10 * * * * ?")
     @Override
     public void process() {
 
